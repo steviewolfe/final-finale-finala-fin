@@ -106,13 +106,14 @@ export default function Compose({
 
           <section className="setup" aria-label="Setup">
             <div className="field">
-              <span className="field-title">Compare these profiles</span>
+              <span className="field-title">Compare up to 4 profiles</span>
               <div className="chips">
                 {profiles.map((p) => (
                   <button
                     key={p.id}
                     className="chip-toggle"
                     aria-pressed={selected.includes(p.id)}
+                    disabled={!selected.includes(p.id) && selected.length >= 4}
                     onClick={() => onToggleProfile(p.id)}
                   >
                     {p.label}

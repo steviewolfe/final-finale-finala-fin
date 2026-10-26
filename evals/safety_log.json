@@ -15,16 +15,16 @@
     "injected_quote_in_evidence": false,
     "rejected_with_line": 0,
     "scores_with_line": {
-      "parent": 46.4,
-      "neurodivergent": 43.6,
-      "chronic_illness": 53.6,
-      "eldercare": 51.0
+      "parent": 47.0,
+      "neurodivergent": 38.8,
+      "chronic_illness": 35.1,
+      "eldercare": 48.4
     },
     "scores_without_line": {
-      "parent": 46.7,
-      "neurodivergent": 38.5,
-      "chronic_illness": 54.2,
-      "eldercare": 51.5
+      "parent": 47.2,
+      "neurodivergent": 38.9,
+      "chronic_illness": 54.5,
+      "eldercare": 50.9
     }
   },
   "3_overspending_budget": {

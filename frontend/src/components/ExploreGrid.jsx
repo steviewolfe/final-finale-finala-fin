@@ -11,6 +11,7 @@ const ORDER = [
   'interview_process',
   'caregiving_and_leave',
   'role_clarity',
+  'inclusion_and_accommodation',
 ]
 const SIGNAL = {
   negative: { label: 'Restriction', colour: 'var(--pink)' },

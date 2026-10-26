@@ -16,7 +16,14 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from between_the_lines.config import MAX_NOTES_CHARS, MAX_POSTING_CHARS, PROJECT_DIR, SAMPLE_DIR, SESSION_TOKEN_BUDGET
+from between_the_lines.config import (
+    MAX_NOTES_CHARS,
+    MAX_POSTING_CHARS,
+    MAX_PROFILES_PER_RUN,
+    PROJECT_DIR,
+    SAMPLE_DIR,
+    SESSION_TOKEN_BUDGET,
+)
 from between_the_lines.explain import FLAGGED_WHY, profile_why, tag_why
 from between_the_lines.highlight import posting_segments
 from between_the_lines.llm import SessionBudget
@@ -241,6 +248,8 @@ def analyze(req: AnalyzeRequest) -> dict:
     unknown = [p for p in req.profiles if p not in PROFILES]
     if unknown or req.primary not in PROFILES:
         raise HTTPException(status_code=400, detail="Unknown profile")
+    if len(set(req.profiles)) > MAX_PROFILES_PER_RUN:
+        raise HTTPException(status_code=400, detail=f"Compare up to {MAX_PROFILES_PER_RUN} profiles at a time")
     try:
         result = run_pipeline(
             req.posting, req.profiles, req.primary, req.notes, budget=budget,

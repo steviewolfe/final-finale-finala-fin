@@ -12,13 +12,13 @@ from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.llm import BudgetExceeded, SessionBudget, call_llm
 from between_the_lines.pipeline import run_pipeline
 from between_the_lines.privacy_guard import guard_questions
-from between_the_lines.profiles import PROFILES
+from between_the_lines.profiles import DEFAULT_COMPARE, PROFILES
 from between_the_lines.quote_checker import check_quotes
 from between_the_lines.schemas import Evidence, GUARD_SCHEMA, Question
 from between_the_lines.security import PostingTooLong, check_length, flagged_sentences
 from between_the_lines.usage import RunMeter
 
-PIDS = list(PROFILES)
+PIDS = DEFAULT_COMPARE
 log = {}
 samples = REPO_DIR / "data" / "sample_postings"
 

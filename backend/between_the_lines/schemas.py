@@ -20,6 +20,7 @@ CATEGORIES = [
     "interview_process",
     "caregiving_and_leave",
     "role_clarity",
+    "inclusion_and_accommodation",
 ]
 
 TAGS = [
@@ -38,6 +39,9 @@ TAGS = [
     "unstructured_interview",
     "generous_leave",
     "unclear_leave",
+    "accommodation_stated",
+    "equal_opportunity_stated",
+    "mandatory_social_events",
 ]
 
 SIGNALS = ["positive", "negative", "unclear"]
@@ -73,16 +77,7 @@ EXTRACTOR_SCHEMA = {
 
 
 class Evidence(BaseModel):
-    category: Literal[
-        "schedule_flexibility",
-        "remote_policy",
-        "communication_style",
-        "pace_and_pressure",
-        "work_environment",
-        "interview_process",
-        "caregiving_and_leave",
-        "role_clarity",
-    ]
+    category: Literal[tuple(CATEGORIES)]
     exact_quote: str = Field(max_length=250)
     signal: Literal["positive", "negative", "unclear"]
     tags: list[str]

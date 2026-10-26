@@ -27,6 +27,7 @@ PORTKEY_BASE_URL = "https://api.portkey.ai/v1"
 MAX_POSTING_CHARS = 12_000
 MAX_NOTES_CHARS = 500
 MAX_LLM_CALLS_PER_RUN = 6
+MAX_PROFILES_PER_RUN = 4  # keeps the side-by-side view readable
 SESSION_TOKEN_BUDGET = 60_000
 
 # Per-call output caps. These must be generous: the model also spends output

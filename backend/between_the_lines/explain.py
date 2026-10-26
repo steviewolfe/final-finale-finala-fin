@@ -25,6 +25,9 @@ TAG_WHY: dict[str, str] = {
     "unstructured_interview": "An unstructured interview makes the process harder to prepare for.",
     "generous_leave": "Generous leave gives room for time off without losing pay or standing.",
     "unclear_leave": "Unclear leave rules make it hard to know what time off is possible.",
+    "accommodation_stated": "The posting says adjustments can be requested, so the conversation can start from a known route.",
+    "equal_opportunity_stated": "A stated equal-opportunity commitment suggests the employer has thought about fair treatment.",
+    "mandatory_social_events": "Expected attendance at team events can clash with caring duties, faith practice, or energy limits.",
 }
 
 SIGNAL_WHY: dict[str, str] = {
@@ -50,6 +53,7 @@ CATEGORY_WHY: dict[str, dict[str, str]] = {
         "interview_process": "A clear process makes it easier to schedule around childcare.",
         "caregiving_and_leave": "Clear leave for sick children and emergencies protects routines.",
         "role_clarity": "A clear role makes it easier to plan a workday with interruptions.",
+        "inclusion_and_accommodation": "A stated route for flexible arrangements makes it easier to ask for them.",
     },
     "neurodivergent": {
         "schedule_flexibility": "Flexible or predictable hours help with focus and energy.",
@@ -60,6 +64,7 @@ CATEGORY_WHY: dict[str, dict[str, str]] = {
         "interview_process": "A structured interview gives a clear way to prepare.",
         "caregiving_and_leave": "Clear rules for breaks and time off help plan recovery.",
         "role_clarity": "Clear responsibilities and success measures reduce guesswork.",
+        "inclusion_and_accommodation": "A stated way to request adjustments makes it easier to ask for them.",
     },
     "chronic_illness": {
         "schedule_flexibility": "Flexible hours help plan around energy levels and appointments.",
@@ -70,6 +75,7 @@ CATEGORY_WHY: dict[str, dict[str, str]] = {
         "interview_process": "A clear process makes it easier to plan around appointments.",
         "caregiving_and_leave": "Generous and clear sick and medical leave protects pacing.",
         "role_clarity": "A clear scope makes it easier to plan and pace the work.",
+        "inclusion_and_accommodation": "A stated route for adjustments makes it easier to ask for them.",
     },
     "eldercare": {
         "schedule_flexibility": "Flexible hours help when a relative needs appointments or support.",
@@ -80,6 +86,51 @@ CATEGORY_WHY: dict[str, dict[str, str]] = {
         "interview_process": "A clear process makes it easier to plan around family commitments.",
         "caregiving_and_leave": "Clear, reasonable leave for family emergencies protects the role.",
         "role_clarity": "A clear role makes it easier to plan around unpredictable days.",
+        "inclusion_and_accommodation": "A stated route for adjustments makes it easier to ask for them.",
+    },
+    "deaf_hard_of_hearing": {
+        "schedule_flexibility": "Schedules posted in advance make planning around captioned or interpreted sessions easier.",
+        "remote_policy": "Written-first setups let you work without relying on overheard conversation.",
+        "communication_style": "Written, captioned, and asynchronous communication lowers the load of live calls.",
+        "pace_and_pressure": "Clear priorities in writing reduce the need to catch fast verbal changes.",
+        "work_environment": "Quieter spaces and fewer overlapping conversations make listening easier.",
+        "interview_process": "A structured interview with questions shared in advance lets you prepare access needs.",
+        "caregiving_and_leave": "Clear rules for time off and appointments help plan access support.",
+        "role_clarity": "Written responsibilities and success measures reduce reliance on verbal instructions.",
+        "inclusion_and_accommodation": "A stated route for access adjustments makes it easier to ask for them.",
+    },
+    "religious_observance": {
+        "schedule_flexibility": "Predictable schedules make it easier to plan around prayer times and holy days.",
+        "remote_policy": "Working from home can make it easier to keep prayer times and rest days.",
+        "communication_style": "Written updates reduce pressure to answer on days or times you observe.",
+        "pace_and_pressure": "Steady pacing leaves room for observance without falling behind.",
+        "work_environment": "Clear dress code and event expectations make it easier to plan in advance.",
+        "interview_process": "Knowing interview dates early helps plan around observance.",
+        "caregiving_and_leave": "Clear leave for holy days and observance protects your practice.",
+        "role_clarity": "Clear responsibilities make it easier to plan a week around observance.",
+        "inclusion_and_accommodation": "A stated route for religious accommodation makes it easier to ask for it.",
+    },
+    "students_part_time": {
+        "schedule_flexibility": "Fixed or posted shifts make it easier to fit around classes and other work.",
+        "remote_policy": "Remote options can save travel time between study, work, and home.",
+        "communication_style": "Written updates fit around study time and irregular availability.",
+        "pace_and_pressure": "A steady pace is easier to keep up with alongside coursework.",
+        "work_environment": "Clear expectations for events and travel help plan a busy week.",
+        "interview_process": "A clear process makes it easier to fit interviews around classes.",
+        "caregiving_and_leave": "Clear rules for time off around exams protect your studies.",
+        "role_clarity": "Clear hours and duties make it easier to plan a term.",
+        "inclusion_and_accommodation": "A stated route for flexible arrangements makes it easier to ask for them.",
+    },
+    "career_returners": {
+        "schedule_flexibility": "Clear schedules help rebuild a routine after a break.",
+        "remote_policy": "Remote options can ease a return while confidence builds.",
+        "communication_style": "Clear written expectations make it easier to find your footing.",
+        "pace_and_pressure": "A realistic pace gives room to relearn skills without rushing.",
+        "work_environment": "A supportive team setting makes a return easier.",
+        "interview_process": "A structured interview lets you show current skills clearly.",
+        "caregiving_and_leave": "Clear leave rules help plan around the first months back.",
+        "role_clarity": "Clear success measures and a ramp-up plan help you see what good work looks like.",
+        "inclusion_and_accommodation": "A stated route for returnship or support adjustments makes it easier to ask.",
     },
 }
 

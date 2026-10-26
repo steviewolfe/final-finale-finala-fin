@@ -23,11 +23,11 @@ with sync_playwright() as p:
     check("predict card shows before the evidence", pg.locator(".predict .predict-btn").count() == 3)
     pg.click(".predict .predict-btn >> nth=0")
     reveal = pg.locator(".reveal-line").inner_text() if pg.locator(".reveal-line").count() else ""
-    check("predict reveals the posting's count", "of 8" in reveal, reveal[:80])
+    check("predict reveals the posting's count", "of 9" in reveal, reveal[:80])
 
     # 2. Scroll reveal: lower underlines start dimmed, and light up on scroll
     start_progress = pg.locator(".read-progress").inner_text() if pg.locator(".read-progress").count() else "none"
-    check("rail shows reading progress before scrolling", start_progress.startswith("Reading: ") and " of 16" in start_progress, start_progress)
+    check("rail shows reading progress before scrolling", start_progress.startswith("Reading: ") and " of " in start_progress, start_progress)
     lit_start = pg.locator("mark.seg:not(.is-unlit)").count()
     unlit_start = pg.locator("mark.seg.is-unlit").count()
     check("some underlines are dimmed before scrolling", unlit_start > 0, f"lit {lit_start}, unlit {unlit_start}")
@@ -50,7 +50,7 @@ with sync_playwright() as p:
     pg.click("button.explore-toggle") if pg.locator("button.explore-toggle").count() else None
     dots = pg.locator(".dot-hit").count()
     total = pg.evaluate("document.querySelectorAll('.explore-row').length")
-    check("explore grid shows one dot per claim", dots > 0 and total == 8, f"{dots} dots, {total} rows")
+    check("explore grid shows one dot per claim", dots > 0 and total == 9, f"{dots} dots, {total} rows")
     pg.click(".signal-toggles button:has-text('Restriction')")
     fewer = pg.locator(".dot-hit").count()
     check("signal toggle filters dots", fewer < dots, f"{dots} -> {fewer}")

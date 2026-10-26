@@ -10,6 +10,7 @@ import DetailsDrawer from './components/DetailsDrawer.jsx'
 import * as api from './api.js'
 
 const FALLBACK_LIMITS = { max_posting_chars: 12000, max_notes_chars: 500 }
+const MAX_COMPARE = 4 // keeps the side-by-side view readable; the server enforces the same cap
 
 const titleFromSample = (name) =>
   name.replace(/^\d+_/, '').replace(/\.txt$/, '').replace(/_/g, ' ')
@@ -49,7 +50,7 @@ export default function App() {
   useEffect(() => {
     api.getProfiles().then((ps) => {
       setProfiles(ps)
-      setSelected(ps.map((p) => p.id))
+      setSelected(ps.slice(0, MAX_COMPARE).map((p) => p.id))
       setPrimary(ps[0]?.id || '')
       setLens(ps[0]?.id || '')
     }).catch((e) => setError(e.message))
@@ -87,9 +88,13 @@ export default function App() {
 
   const toggleProfile = (id) => {
     setSelected((cur) => {
-      const next = cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]
-      if (!next.includes(primary) && next.length) setPrimary(next[0])
-      return next
+      if (cur.includes(id)) {
+        const next = cur.filter((x) => x !== id)
+        if (!next.includes(primary) && next.length) setPrimary(next[0])
+        return next
+      }
+      // Ignore a fifth profile: the cap is shown on the chips, so this is only a safety net.
+      return cur.length >= MAX_COMPARE ? cur : [...cur, id]
     })
   }
 

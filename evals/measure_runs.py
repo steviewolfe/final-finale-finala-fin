@@ -2,7 +2,7 @@
 
 Each sample is checked twice with all four profiles and a private note:
   cold: extraction cache off (every call is made)
-  warm: extraction cache on (the second check of the same posting)
+  warm: a repeat check of the same posting, served from the extraction cache
 Token counts come from the model's own usage fields, via RunMeter.
     ./.venv/bin/python evals/measure_runs.py
 """
@@ -17,16 +17,19 @@ from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.llm import SessionBudget
 from between_the_lines.pipeline import run_pipeline
 from between_the_lines.pricing import PRICE_SOURCE, PRICE_PER_MTOK
-from between_the_lines.profiles import PROFILES
+from between_the_lines.profiles import DEFAULT_COMPARE, PROFILES
 
 NOTES = "I have ADHD and two kids"
-PIDS = list(PROFILES)
+PIDS = DEFAULT_COMPARE
 budget = SessionBudget(limit=10**9)
 samples = sorted((REPO_DIR / "data" / "sample_postings").glob("*.txt"))
 
 runs = []
 for path in samples:
     text = path.read_text(encoding="utf-8")
+    # cold: every call made. prime: fills the extraction cache (not recorded).
+    # warm: a true repeat of the same posting, which should hit the cache.
+    run_pipeline(text, PIDS, "parent", NOTES, budget=budget, use_cache=True)
     for mode, use_cache in [("cold", False), ("warm", True)]:
         r = run_pipeline(text, PIDS, "parent", NOTES, budget=budget, use_cache=use_cache)
         m = r.meter

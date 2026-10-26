@@ -14,9 +14,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.llm import SessionBudget
 from between_the_lines.pipeline import run_pipeline
-from between_the_lines.profiles import PROFILES
+from between_the_lines.profiles import DEFAULT_COMPARE, PROFILES
 
-PIDS = list(PROFILES)
+PIDS = DEFAULT_COMPARE
 budget = SessionBudget(limit=10**9)  # evidence script; the session budget is not the point here
 sample = REPO_DIR / "data" / "sample_postings"
 p01 = (sample / "01_startup_ops_manager.txt").read_text()

@@ -190,7 +190,7 @@ def report_html() -> str:
             f"quoted claims. Measured: {sample04['by_agent'][0]['input']:,} input and {sample04['by_agent'][0]['output']:,} output tokens.",
             f"Quote checker: keeps {sample04['evidence_count']} of {sample04['evidence_count'] + sample04['rejected']} quotes; "
             f"{sample04['rejected']} rejected, because each must appear word for word in the posting.",
-            "Scorer: turns the kept claims into scores for all four profiles, with no model call. "
+            "Scorer: turns the kept claims into scores for the four default profiles, with no model call. "
             + ", ".join(f"{k.replace('_', ' ')} {v}" for k, v in sample04["scores"].items()) + ".",
             f"Question drafter (LLM): writes {sample04['questions']} neutral questions for the primary profile. "
             f"Measured: {sample04['by_agent'][1]['input']:,} input and {sample04['by_agent'][1]['output']:,} output tokens.",
@@ -224,7 +224,7 @@ def report_html() -> str:
          f"Repeat check: cost {money(warm['cost_usd'])} instead of {money(cold['cost_usd'])} ({saving_warm:.0%} lower).",
          f"Scores identical on every repeat: {'yes' if scores_match else 'NO, investigate'} (checked across {len(warm_runs)} samples)."],
         ["One extraction shared by all profiles",
-         f"Four profiles cost one extraction, not four. Measured extractor input: {agents['extractor']['input'] // len(cold_runs):,} tokens per run.",
+         f"One extraction serves every profile, so comparing more profiles adds no model calls. Measured extractor input: {agents['extractor']['input'] // len(cold_runs):,} tokens per run.",
          "No loss: every profile scores the same quoted evidence."],
         ["Batched privacy guard (one call for all questions)",
          f"Guard runs once per check: {agents['guard']['calls']} calls over {len(cold_runs)} runs.",
@@ -295,9 +295,10 @@ def report_html() -> str:
     [
       ["Where does each claim come from?", "Every claim is quoted from the posting, and a checker rejects any quote not in the text.", "Not described.", "Flags words, not claims. No source quote per claim.", "Summaries can paraphrase, so the source is not guaranteed."],
       ["Is the score the same each time?", "Yes. Scores are computed by fixed code from the quotes. Repeat checks matched exactly.", "Score produced by the model.", "Word counts or fixed lists: repeatable.", "Depends on the model's answer for that run."],
-      ["Does it check fit for a need?", "Yes, for four named needs, with weights shown.", "Yes, from a 25-question quiz.", "No. Language only.", "Only if asked."],
+      ["Does it check fit for a need?", "Yes, for eight named needs, with weights shown.", "Yes, from a 25-question quiz.", "No. Language only.", "Only if asked."],
       ["Can I ask the employer safely?", "Questions are checked against private notes, and every change is logged.", "Suggested questions, privacy stated as user-only.", "Not designed for this.", "Not designed for this."],
     ])}
+  <p>The app now covers eight need profiles: the original four, plus Deaf or hard of hearing, Religious observance, Students and part-time workers, and Career returners. The side-by-side view is capped at four, so it stays readable. It also checks a ninth category, inclusion and accommodation. A content analysis of 1,886 job ads found accommodation statements in only 9% of them and equal-opportunity statements in 19% (<a href="https://pubmed.ncbi.nlm.nih.gov/41701271/">PubMed 41701271</a>), so a posting that does not say how to ask for adjustments is itself a signal.</p>
   <p>Two things here are new for this course: the claim checks (quotes must exist, and an injected instruction cannot change the evidence) and the privacy check on the questions. I have not searched exhaustively for other tools that combine both, so that claim is limited to the tools listed above.</p>
 </section>
 
@@ -317,7 +318,7 @@ def report_html() -> str:
       ["Privacy guard", "Check each question against private notes; rewrite or drop; log", "Questions, private notes, keyword list", "Keyword list plus gpt-6-luna"],
     ])}
   <h3>One real run, traced step by step</h3>
-  <p>Posting 04 (an onsite shift role), all four profiles, with the private note &ldquo;I have ADHD and two kids&rdquo;. Figures are from the cold run measured in <code>evals/measurements.json</code>.</p>
+  <p>Posting 04 (an onsite shift role), the four default profiles, with the private note &ldquo;I have ADHD and two kids&rdquo;. Figures are from the cold run measured in <code>evals/measurements.json</code>.</p>
   <ol>{sample04_steps}</ol>
   <h3>Per-agent screenshots</h3>
   <p>Each screenshot is from the same traced run unless the caption says otherwise. Each one shows that agent&rsquo;s own output on screen.</p>
@@ -333,7 +334,7 @@ def report_html() -> str:
 
 <section class="page pagebreak">
   <h2>4. Tokenomics</h2>
-  <p>Every number here is measured. Each sample was checked twice with all four profiles and a private note: once cold (every model call made) and once warm (repeat of the same posting, using the extraction cache). Token counts are the model's own usage fields, recorded per call.</p>
+  <p>Every number here is measured. Each sample was checked twice with the four default profiles and a private note: once cold (every model call made) and once warm (repeat of the same posting, using the extraction cache). Token counts are the model's own usage fields, recorded per call.</p>
   {table(["Per typical run (mean of 5 samples)", "Cold", "Warm (repeat posting)"], cache_rows)}
   <h3>Where the tokens go</h3>
   {table(["Agent", "Calls (cold runs)", "Input tokens", "Output tokens", "Share of output", "Share of cost"], agent_rows)}
@@ -396,7 +397,6 @@ def report_html() -> str:
 
 
 def slides_html() -> str:
-    s2 = S["2_prompt_injection"]
     reveal_css = "https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
     reveal_theme = "https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css"
     reveal_js = "https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"
@@ -404,22 +404,53 @@ def slides_html() -> str:
 :root { --page:#F7F6F3; --paper:#FDFDF7; --text:#222; --muted:#777; --pink:#E05374; --teal:#439294; --mustard:#D3A344; }
 .reveal { font-family: Newsreader, Georgia, serif; color: var(--text); }
 .reveal .slides { text-align: left; }
-.reveal section { background: var(--page); }
-.reveal h1, .reveal h2 { font-family: 'Schibsted Grotesk', sans-serif; text-transform: uppercase; color: #111; letter-spacing: -0.01em; line-height: 1.05; }
-.reveal h1 { font-size: 2.6em; } .reveal h2 { font-size: 1.9em; }
-.reveal p, .reveal li { font-size: 0.7em; line-height: 1.45; }
-.kicker { font-family: 'Space Mono', monospace; font-size: 0.5em; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
-.big { font-family: 'Schibsted Grotesk', sans-serif; font-size: 2.6em; line-height: 1; color: var(--pink); }
-.grid3 { display: flex; gap: 1.2em; }
-.grid3 > div { flex: 1; background: var(--paper); box-shadow: 0 4px 12px rgba(0,0,0,.1); padding: .8em 1em; }
-.todo { background:#FFF3C4; color:#6b4f00; padding: 0 .25em; font-family:'Space Mono', monospace; font-size:.6em; }
-.reveal img { border: 1px solid #E0E0E0; max-height: 470px; box-shadow: 0 4px 12px rgba(0,0,0,.1); }
-.reveal table { font-size: .55em; }
-.reveal table th { color: var(--muted); }
-.diagram svg { width: 100%; height: auto; }
+.reveal section { background: var(--page); padding: 0 !important; }
+.reveal h1, .reveal h2 { font-family: 'Schibsted Grotesk', sans-serif; text-transform: uppercase; color: #111; letter-spacing: -0.01em; line-height: 1.05; margin: 0 0 .35em 0; }
+.reveal h1 { font-size: 1.9em; } .reveal h2 { font-size: 1.35em; }
+.reveal p, .reveal li { font-size: 0.6em; line-height: 1.4; margin: .2em 0; }
+.reveal ul { margin: .2em 0 .2em 1em; }
+.kicker { font-family: 'Space Mono', monospace; font-size: 0.42em; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 .3em 0; }
+.big { display: block; font-family: 'Schibsted Grotesk', sans-serif; font-size: 1.35em; line-height: 1.05; color: var(--pink); overflow-wrap: anywhere; }
+.stats { display: flex; gap: .8em; margin: .4em 0; }
+.stats > div { flex: 1 1 0; min-width: 0; background: var(--paper); box-shadow: 0 2px 8px rgba(0,0,0,.08); padding: .6em .7em; font-size: 0.5em; line-height: 1.35; }
+.stats .src { font-family: 'Space Mono', monospace; font-size: 0.8em; color: var(--muted); }
+.reveal table { font-size: 0.45em; width: 100%; border-collapse: collapse; margin: .3em 0; }
+.reveal th { color: var(--muted); font-weight: 400; text-align: left; border-bottom: 1px solid #E0E0E0; padding: .3em .4em; }
+.reveal td { border-bottom: 1px solid #E0E0E0; padding: .3em .4em; vertical-align: top; }
+.shots { display: flex; gap: .8em; align-items: flex-start; }
+.shots > figure { flex: 1 1 0; min-width: 0; margin: 0; }
+.shots img { width: 100%; max-height: 330px; object-fit: contain; border: 1px solid #E0E0E0; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.shots figcaption { font-family: 'Space Mono', monospace; font-size: 0.38em; color: var(--muted); margin-top: .3em; }
+.diagram svg { width: 100%; height: auto; max-height: 300px; }
+.note { font-family: 'Space Mono', monospace; font-size: 0.4em; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: .4em; }
+.pad { padding: 1.2em 1.4em; box-sizing: border-box; height: 100%; }
 """
-    def t(text):
-        return f'<span class="todo">[TO COMPLETE: {html.escape(text)}]</span>'
+
+    def stats_row(items):
+        cells = "".join(
+            f'<div><span class="big">{big}</span>{label}{"<br><span class=src>" + src + "</span>" if src else ""}</div>'
+            for big, label, src in items)
+        return f'<div class="stats">{cells}</div>'
+
+    s1 = S["1_invented_quote"]; s2 = S["2_prompt_injection"]; s3 = S["3_overspending_budget"]
+    s4 = S["4_runaway_calls"]; s5 = S["5_oversized_posting"]; s6 = S["6_private_data_leak"]
+    max_shift = max(abs(s2["scores_with_line"][k] - s2["scores_without_line"][k]) for k in s2["scores_with_line"])
+
+    safety_rows = [
+        ("Invented quote", "Quote checker", f"rejected ({s1['result']})"),
+        ("Prompt injection", "Injection scanner", f"{len(s2['flagged_sentences'])} sentences flagged; 0 injected quotes kept"),
+        ("Budget exhausted", "Budget check", "stopped, 0 model calls"),
+        ("Runaway loop", "Per-run call cap", "stopped at 6 calls"),
+        ("Oversized paste", "Length limit", "refused, 0 model calls"),
+        ("Private data leak", "Privacy guard", f"{s6['action']} and logged; 0 leaks left"),
+    ]
+    safety_table = ("<table><thead><tr><th>Failure</th><th>Defence</th><th>Result (tested)</th></tr></thead><tbody>"
+                    + "".join(f"<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>" for a, b, c in safety_rows)
+                    + "</tbody></table>")
+
+    shares = {n: round(100 * t["cost"] / total_cost) for n, t in agents.items()}
+    per_run = money(cold["cost_usd"], 5)
+    warm_pct = f"{saving_warm:.0%}"
 
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>Between the Lines: slides</title>
@@ -429,97 +460,110 @@ def slides_html() -> str:
 <style>{font_faces()}\n{slide_css}</style></head><body>
 <div class="reveal"><div class="slides">
 
-<section>
-  <p class="kicker">MGT 409 · Final project</p>
+<section class="pad">
+  <p class="kicker">MGT 409 · Final project · Stevie Wolfe</p>
   <h1>Between the Lines</h1>
-  <p>Know what a job asks of you before you apply.</p>
+  <p>Know what a job asks of you before you apply. Every claim is quoted from the posting.</p>
+  <p class="note">Repository: github.com/steviewolfe/final-finale-finala-fin</p>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">The problem</p>
   <h2>Postings hide what decides fit</h2>
-  <p>Hours, pace, sick days, a child at home: most postings leave them out, so people guess, or stay silent.</p>
+  {stats_row([
+      ("84%", "of 1,886 job ads use ableist wording", "PubMed 41701271"),
+      ("9%", "of ads state how to request accommodations", "PubMed 41701271"),
+      ("71% vs 49%", "of parents and carers want flexibility vs get it", "Indeed, Ireland"),
+  ])}
+  <p>Most people guess, or stay silent. Asking can feel risky, so the decision is made with less information than it should be.</p>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">What is new</p>
-  <h2>Every claim has a source</h2>
-  <div class="grid3">
-    <div><b>Quoted</b><p>Each claim is a quote from the posting. Invented quotes are rejected.</p></div>
-    <div><b>Repeatable</b><p>Scores come from fixed code. Repeat checks matched exactly.</p></div>
-    <div><b>Private</b><p>Questions are checked against your notes. Every change is logged.</p></div>
-  </div>
+  <h2>Claims with sources, repeatable scores</h2>
+  <table>
+    <thead><tr><th></th><th>Raaha (press accounts)</th><th>Posting-language tools</th><th>Between the Lines</th></tr></thead>
+    <tbody>
+      <tr><td>Each claim quoted from the posting</td><td>Not described</td><td>No, flags words</td><td><b>Yes; invented quotes rejected</b></td></tr>
+      <tr><td>Same input, same score</td><td>Model-produced</td><td>Word lists</td><td><b>Yes; repeat runs matched exactly</b></td></tr>
+      <tr><td>Questions checked against private notes</td><td>Not described</td><td>No</td><td><b>Yes; every change logged</b></td></tr>
+      <tr><td>Needs compared side by side</td><td>One quiz profile</td><td>No</td><td><b>8 profiles, up to 4 at once</b></td></tr>
+    </tbody>
+  </table>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">How the agents work</p>
   <h2>Two language-model agents, three checks</h2>
   <div class="diagram">{DIAGRAM}</div>
+  <p class="note">Pink: language-model agents (gpt-6-luna) · Ink: plain Python checks</p>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">Demo</p>
-  <h2>Review, and a hidden instruction caught</h2>
-  <div class="grid3">
-    <div><img src="{data_uri(SHOTS / '02_review.png', 'image/png')}" alt="Review screen"></div>
-    <div><img src="{data_uri(SHOTS / '07_flagged.png', 'image/png')}" alt="Flagged hidden instruction"></div>
+  <h2>Every claim sits next to its quote</h2>
+  <div class="shots">
+    <figure><img src="{data_uri(SHOTS / '02_review.png', 'image/png')}" alt="Review screen"><figcaption>Review: quoted claims and the rail</figcaption></figure>
+    <figure><img src="{data_uri(SHOTS / '07_flagged.png', 'image/png')}" alt="Flagged instruction"><figcaption>Hidden instruction caught and ignored</figcaption></figure>
   </div>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">Cost to run</p>
-  <h2>${per_user_month:.4f} per user per month</h2>
-  <div class="grid3">
-    <div><span class="big">{money(cold['cost_usd'], 5)}</span>per typical run (measured)</div>
-    <div><span class="big">{money(per_user_month * 100, 2)}</span>at 100 users</div>
-    <div><span class="big">{money(per_user_month * 10_000, 0)}</span>at 10,000 users</div>
-  </div>
-  <p class="kicker">Cold runs, gpt-6-luna list prices. Usage assumes {CHECKS_PER_MONTH} checks per user per month.</p>
+  <h2>Under a tenth of a cent per check</h2>
+  {stats_row([
+      (per_run, f"per typical check, measured ({int(cold['calls'])} calls)", ""),
+      (warm_pct, "lower cost on a repeat posting (cache)", "measured"),
+      (money(per_user_month, 4), f"per user per month at {CHECKS_PER_MONTH} checks", "estimate"),
+  ])}
+  <table>
+    <thead><tr><th>Users</th><th>Monthly cost</th></tr></thead>
+    <tbody>
+      <tr><td>100</td><td>{money(per_user_month * 100, 2)}</td></tr>
+      <tr><td>10,000</td><td>{money(per_user_month * 10_000, 2)}</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Prices: gpt-6-luna, $0.10 in / $0.50 out per million tokens. Extractor is {shares['extractor']}% of cost.</p>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">Safety</p>
-  <h2>Six failures, six defences</h2>
-  <table><thead><tr><th>Failure</th><th>Result</th></tr></thead><tbody>
-  <tr><td>Invented quote</td><td>Rejected</td></tr>
-  <tr><td>Prompt injection</td><td>Flagged; no quote reached the evidence</td></tr>
-  <tr><td>Budget exhausted</td><td>Stopped, zero calls</td></tr>
-  <tr><td>Runaway calls</td><td>Stopped at the cap</td></tr>
-  <tr><td>Oversized paste</td><td>Refused, zero calls</td></tr>
-  <tr><td>Private data leak</td><td>Rewritten, logged, no leak</td></tr>
-  </tbody></table>
+  <h2>Six failures tested, six stopped</h2>
+  {safety_table}
+  <p class="note">Injection shifted one profile by {max_shift:.1f} points. Reported as a limit.</p>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">Impact</p>
-  <h2>What we have measured</h2>
-  <div class="grid3">
-    <div><span class="big">{money(cold['cost_usd'], 4)}</span>per check</div>
-    <div><span class="big">{"100%" if scores_match else "NOT MET"}</span>repeat scores identical</div>
-    <div><span class="big">5</span>real users tried it; 100% said it gave useful information they would have skipped</div>
-  </div>
-  <p>Self-reported by five testers. Time saved has not been measured.</p>
+  <h2>What we measured, and what testers said</h2>
+  {stats_row([
+      ("5 of 5", "testers said it gave useful information they would have skipped", "self-reported"),
+      ("100%", "repeat checks matched the first scores exactly", "measured"),
+      (f"{sample04['evidence_count']} of {sample04['evidence_count'] + sample04['rejected']}", "quotes in the traced run kept after checking", "measured"),
+  ])}
+  <p>Time saved was not measured, so no time claim is made.</p>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">Limits and next</p>
   <h2>What we would do next</h2>
   <ul>
-    <li>Hand-labelled accuracy on 30 real postings</li>
-    <li>Working prompt caching and a confirmed price sheet</li>
+    <li>Accuracy on 30 real postings, labelled by hand</li>
+    <li>Working prompt caching, and a provider-confirmed price sheet</li>
+    <li>Timed trial with more testers and one quote each, with permission</li>
     <li>Hosted deployment, so no setup is needed</li>
   </ul>
 </section>
 
-<section>
+<section class="pad">
   <p class="kicker">Thank you</p>
   <h2>Between the Lines</h2>
-  <p>Code: <a href="https://github.com/steviewolfe/final-finale-finala-fin">github.com/steviewolfe/final-finale-finala-fin</a></p>
+  <p>Code and run instructions: github.com/steviewolfe/final-finale-finala-fin</p>
 </section>
 
 </div></div>
 <script src="{reveal_js}"></script>
-<script>Reveal.initialize({{ hash: true, controls: true, progress: true, slideNumber: true }});</script>
+<script>Reveal.initialize({{ hash: true, controls: true, progress: true, slideNumber: true, width: 1280, height: 720, margin: 0.04 }});</script>
 </body></html>"""
 
 

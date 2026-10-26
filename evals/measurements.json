@@ -5,108 +5,101 @@
       "mode": "cold",
       "error": null,
       "calls": 3,
-      "input_tokens": 1817,
+      "input_tokens": 1842,
       "cached_input_tokens": 0,
-      "output_tokens": 1475,
-      "total_tokens": 3292,
-      "cost_usd": 0.000919,
+      "output_tokens": 1517,
+      "total_tokens": 3359,
+      "cost_usd": 0.000943,
       "by_agent": [
         {
           "agent": "extractor",
-          "input": 937,
+          "input": 1027,
           "cached": 0,
-          "output": 1021,
-          "cost_usd": 0.000604
+          "output": 1232,
+          "cost_usd": 0.000719
         },
         {
           "agent": "drafter",
-          "input": 491,
+          "input": 462,
           "cached": 0,
-          "output": 363,
-          "cost_usd": 0.000231
+          "output": 197,
+          "cost_usd": 0.000145
         },
         {
           "agent": "guard",
-          "input": 389,
+          "input": 353,
           "cached": 0,
-          "output": 91,
-          "cost_usd": 8.4e-05
+          "output": 88,
+          "cost_usd": 7.9e-05
         }
       ],
       "scores": {
-        "parent": 50.4,
-        "neurodivergent": 35.1,
-        "chronic_illness": 29.9,
-        "eldercare": 29.0
+        "parent": 45.7,
+        "neurodivergent": 32.1,
+        "chronic_illness": 27.1,
+        "eldercare": 28.9
       },
-      "evidence_count": 12,
+      "evidence_count": 14,
       "rejected": 0,
-      "questions": 3
+      "questions": 2
     },
     {
       "sample": "01_startup_ops_manager.txt",
       "mode": "warm",
       "error": null,
-      "calls": 3,
-      "input_tokens": 1817,
+      "calls": 2,
+      "input_tokens": 815,
       "cached_input_tokens": 0,
-      "output_tokens": 1475,
-      "total_tokens": 3292,
-      "cost_usd": 0.000919,
+      "output_tokens": 285,
+      "total_tokens": 1100,
+      "cost_usd": 0.000224,
       "by_agent": [
         {
-          "agent": "extractor",
-          "input": 937,
-          "cached": 0,
-          "output": 1021,
-          "cost_usd": 0.000604
-        },
-        {
           "agent": "drafter",
-          "input": 491,
+          "input": 462,
           "cached": 0,
-          "output": 363,
-          "cost_usd": 0.000231
+          "output": 197,
+          "cost_usd": 0.000145
         },
         {
           "agent": "guard",
-          "input": 389,
+          "input": 353,
           "cached": 0,
-          "output": 91,
-          "cost_usd": 8.4e-05
+          "output": 88,
+          "cost_usd": 7.9e-05
         }
       ],
       "scores": {
-        "parent": 50.4,
-        "neurodivergent": 35.1,
-        "chronic_illness": 29.9,
-        "eldercare": 29.0
+        "parent": 45.7,
+        "neurodivergent": 32.1,
+        "chronic_illness": 27.1,
+        "eldercare": 28.9
       },
-      "evidence_count": 12,
+      "evidence_count": 14,
       "rejected": 0,
-      "questions": 3
+      "questions": 2
     },
     {
       "sample": "02_hybrid_customer_success.txt",
       "mode": "cold",
       "error": null,
       "calls": 3,
-      "input_tokens": 1692,
+      "input_tokens": 1788,
       "cached_input_tokens": 0,
-      "output_tokens": 1551,
-      "total_tokens": 3243,
-      "cost_usd": 0.000945,
+      "output_tokens": 1289,
+      "total_tokens": 3077,
+      "cost_usd": 0.000823,
       "by_agent": [
         {
           "agent": "extractor",
-          "input": 946,
+          "input": 1036,
           "cached": 0,
-          "output": 1386,
-          "cost_usd": 0.000788
+          "output": 1124,
+          "cost_usd": 0.000666
         },
         {
           "agent": "drafter",
-          "input": 406,
+          "input": 412,
           "cached": 0,
           "output": 100,
           "cost_usd": 9.1e-05
@@ -120,12 +113,12 @@
         }
       ],
       "scores": {
-        "parent": 63.6,
-        "neurodivergent": 71.9,
-        "chronic_illness": 42.2,
+        "parent": 63.4,
+        "neurodivergent": 69.7,
+        "chronic_illness": 42.5,
         "eldercare": 48.8
       },
-      "evidence_count": 9,
+      "evidence_count": 8,
       "rejected": 0,
       "questions": 1
     },
@@ -133,23 +126,16 @@
       "sample": "02_hybrid_customer_success.txt",
       "mode": "warm",
       "error": null,
-      "calls": 3,
-      "input_tokens": 1692,
+      "calls": 2,
+      "input_tokens": 752,
       "cached_input_tokens": 0,
-      "output_tokens": 1551,
-      "total_tokens": 3243,
-      "cost_usd": 0.000945,
+      "output_tokens": 165,
+      "total_tokens": 917,
+      "cost_usd": 0.000158,
       "by_agent": [
         {
-          "agent": "extractor",
-          "input": 946,
-          "cached": 0,
-          "output": 1386,
-          "cost_usd": 0.000788
-        },
-        {
           "agent": "drafter",
-          "input": 406,
+          "input": 412,
           "cached": 0,
           "output": 100,
           "cost_usd": 9.1e-05
@@ -163,12 +149,12 @@
         }
       ],
       "scores": {
-        "parent": 63.6,
-        "neurodivergent": 71.9,
-        "chronic_illness": 42.2,
+        "parent": 63.4,
+        "neurodivergent": 69.7,
+        "chronic_illness": 42.5,
         "eldercare": 48.8
       },
-      "evidence_count": 9,
+      "evidence_count": 8,
       "rejected": 0,
       "questions": 1
     },
@@ -177,22 +163,22 @@
       "mode": "cold",
       "error": null,
       "calls": 3,
-      "input_tokens": 1724,
+      "input_tokens": 1851,
       "cached_input_tokens": 0,
-      "output_tokens": 1276,
-      "total_tokens": 3000,
-      "cost_usd": 0.00081,
+      "output_tokens": 1317,
+      "total_tokens": 3168,
+      "cost_usd": 0.000844,
       "by_agent": [
         {
           "agent": "extractor",
-          "input": 978,
+          "input": 1099,
           "cached": 0,
-          "output": 1111,
-          "cost_usd": 0.000653
+          "output": 1152,
+          "cost_usd": 0.000686
         },
         {
           "agent": "drafter",
-          "input": 406,
+          "input": 412,
           "cached": 0,
           "output": 100,
           "cost_usd": 9.1e-05
@@ -206,12 +192,12 @@
         }
       ],
       "scores": {
-        "parent": 93.4,
-        "neurodivergent": 91.4,
-        "chronic_illness": 93.8,
-        "eldercare": 93.7
+        "parent": 94.6,
+        "neurodivergent": 87.5,
+        "chronic_illness": 95.7,
+        "eldercare": 94.8
       },
-      "evidence_count": 10,
+      "evidence_count": 14,
       "rejected": 0,
       "questions": 1
     },
@@ -219,23 +205,16 @@
       "sample": "03_remote_async_analyst.txt",
       "mode": "warm",
       "error": null,
-      "calls": 3,
-      "input_tokens": 1724,
+      "calls": 2,
+      "input_tokens": 752,
       "cached_input_tokens": 0,
-      "output_tokens": 1276,
-      "total_tokens": 3000,
-      "cost_usd": 0.00081,
+      "output_tokens": 165,
+      "total_tokens": 917,
+      "cost_usd": 0.000158,
       "by_agent": [
         {
-          "agent": "extractor",
-          "input": 978,
-          "cached": 0,
-          "output": 1111,
-          "cost_usd": 0.000653
-        },
-        {
           "agent": "drafter",
-          "input": 406,
+          "input": 412,
           "cached": 0,
           "output": 100,
           "cost_usd": 9.1e-05
@@ -249,184 +228,170 @@
         }
       ],
       "scores": {
-        "parent": 93.4,
-        "neurodivergent": 91.4,
-        "chronic_illness": 93.8,
-        "eldercare": 93.7
+        "parent": 94.6,
+        "neurodivergent": 87.5,
+        "chronic_illness": 95.7,
+        "eldercare": 94.8
+      },
+      "evidence_count": 14,
+      "rejected": 0,
+      "questions": 1
+    },
+    {
+      "sample": "04_onsite_shift_coordinator.txt",
+      "mode": "cold",
+      "error": null,
+      "calls": 3,
+      "input_tokens": 1822,
+      "cached_input_tokens": 0,
+      "output_tokens": 1535,
+      "total_tokens": 3357,
+      "cost_usd": 0.00095,
+      "by_agent": [
+        {
+          "agent": "extractor",
+          "input": 1050,
+          "cached": 0,
+          "output": 1307,
+          "cost_usd": 0.000758
+        },
+        {
+          "agent": "drafter",
+          "input": 430,
+          "cached": 0,
+          "output": 163,
+          "cost_usd": 0.000124
+        },
+        {
+          "agent": "guard",
+          "input": 342,
+          "cached": 0,
+          "output": 65,
+          "cost_usd": 6.7e-05
+        }
+      ],
+      "scores": {
+        "parent": 25.8,
+        "neurodivergent": 28.1,
+        "chronic_illness": 18.4,
+        "eldercare": 24.2
+      },
+      "evidence_count": 15,
+      "rejected": 0,
+      "questions": 1
+    },
+    {
+      "sample": "04_onsite_shift_coordinator.txt",
+      "mode": "warm",
+      "error": null,
+      "calls": 2,
+      "input_tokens": 772,
+      "cached_input_tokens": 0,
+      "output_tokens": 228,
+      "total_tokens": 1000,
+      "cost_usd": 0.000191,
+      "by_agent": [
+        {
+          "agent": "drafter",
+          "input": 430,
+          "cached": 0,
+          "output": 163,
+          "cost_usd": 0.000124
+        },
+        {
+          "agent": "guard",
+          "input": 342,
+          "cached": 0,
+          "output": 65,
+          "cost_usd": 6.7e-05
+        }
+      ],
+      "scores": {
+        "parent": 25.8,
+        "neurodivergent": 28.1,
+        "chronic_illness": 18.4,
+        "eldercare": 24.2
+      },
+      "evidence_count": 15,
+      "rejected": 0,
+      "questions": 1
+    },
+    {
+      "sample": "05_marketing_coordinator.txt",
+      "mode": "cold",
+      "error": null,
+      "calls": 3,
+      "input_tokens": 1803,
+      "cached_input_tokens": 0,
+      "output_tokens": 1287,
+      "total_tokens": 3090,
+      "cost_usd": 0.000824,
+      "by_agent": [
+        {
+          "agent": "extractor",
+          "input": 1033,
+          "cached": 0,
+          "output": 1071,
+          "cost_usd": 0.000639
+        },
+        {
+          "agent": "drafter",
+          "input": 429,
+          "cached": 0,
+          "output": 157,
+          "cost_usd": 0.000121
+        },
+        {
+          "agent": "guard",
+          "input": 341,
+          "cached": 0,
+          "output": 59,
+          "cost_usd": 6.4e-05
+        }
+      ],
+      "scores": {
+        "parent": 47.0,
+        "neurodivergent": 38.8,
+        "chronic_illness": 35.1,
+        "eldercare": 48.4
       },
       "evidence_count": 10,
       "rejected": 0,
       "questions": 1
     },
     {
-      "sample": "04_onsite_shift_coordinator.txt",
-      "mode": "cold",
-      "error": null,
-      "calls": 3,
-      "input_tokens": 1775,
-      "cached_input_tokens": 0,
-      "output_tokens": 1426,
-      "total_tokens": 3201,
-      "cost_usd": 0.000891,
-      "by_agent": [
-        {
-          "agent": "extractor",
-          "input": 960,
-          "cached": 0,
-          "output": 1133,
-          "cost_usd": 0.000663
-        },
-        {
-          "agent": "drafter",
-          "input": 456,
-          "cached": 0,
-          "output": 187,
-          "cost_usd": 0.000139
-        },
-        {
-          "agent": "guard",
-          "input": 359,
-          "cached": 0,
-          "output": 106,
-          "cost_usd": 8.9e-05
-        }
-      ],
-      "scores": {
-        "parent": 29.5,
-        "neurodivergent": 33.9,
-        "chronic_illness": 23.1,
-        "eldercare": 29.2
-      },
-      "evidence_count": 15,
-      "rejected": 0,
-      "questions": 2
-    },
-    {
-      "sample": "04_onsite_shift_coordinator.txt",
-      "mode": "warm",
-      "error": null,
-      "calls": 3,
-      "input_tokens": 1775,
-      "cached_input_tokens": 0,
-      "output_tokens": 1426,
-      "total_tokens": 3201,
-      "cost_usd": 0.000891,
-      "by_agent": [
-        {
-          "agent": "extractor",
-          "input": 960,
-          "cached": 0,
-          "output": 1133,
-          "cost_usd": 0.000663
-        },
-        {
-          "agent": "drafter",
-          "input": 456,
-          "cached": 0,
-          "output": 187,
-          "cost_usd": 0.000139
-        },
-        {
-          "agent": "guard",
-          "input": 359,
-          "cached": 0,
-          "output": 106,
-          "cost_usd": 8.9e-05
-        }
-      ],
-      "scores": {
-        "parent": 29.5,
-        "neurodivergent": 33.9,
-        "chronic_illness": 23.1,
-        "eldercare": 29.2
-      },
-      "evidence_count": 15,
-      "rejected": 0,
-      "questions": 2
-    },
-    {
-      "sample": "05_marketing_coordinator.txt",
-      "mode": "cold",
-      "error": null,
-      "calls": 3,
-      "input_tokens": 1715,
-      "cached_input_tokens": 0,
-      "output_tokens": 1428,
-      "total_tokens": 3143,
-      "cost_usd": 0.000886,
-      "by_agent": [
-        {
-          "agent": "extractor",
-          "input": 943,
-          "cached": 0,
-          "output": 1238,
-          "cost_usd": 0.000713
-        },
-        {
-          "agent": "drafter",
-          "input": 424,
-          "cached": 0,
-          "output": 117,
-          "cost_usd": 0.000101
-        },
-        {
-          "agent": "guard",
-          "input": 348,
-          "cached": 0,
-          "output": 73,
-          "cost_usd": 7.1e-05
-        }
-      ],
-      "scores": {
-        "parent": 46.4,
-        "neurodivergent": 43.6,
-        "chronic_illness": 53.6,
-        "eldercare": 51.0
-      },
-      "evidence_count": 9,
-      "rejected": 0,
-      "questions": 1
-    },
-    {
       "sample": "05_marketing_coordinator.txt",
       "mode": "warm",
       "error": null,
-      "calls": 3,
-      "input_tokens": 1715,
+      "calls": 2,
+      "input_tokens": 770,
       "cached_input_tokens": 0,
-      "output_tokens": 1428,
-      "total_tokens": 3143,
-      "cost_usd": 0.000886,
+      "output_tokens": 216,
+      "total_tokens": 986,
+      "cost_usd": 0.000185,
       "by_agent": [
         {
-          "agent": "extractor",
-          "input": 943,
-          "cached": 0,
-          "output": 1238,
-          "cost_usd": 0.000713
-        },
-        {
           "agent": "drafter",
-          "input": 424,
+          "input": 429,
           "cached": 0,
-          "output": 117,
-          "cost_usd": 0.000101
+          "output": 157,
+          "cost_usd": 0.000121
         },
         {
           "agent": "guard",
-          "input": 348,
+          "input": 341,
           "cached": 0,
-          "output": 73,
-          "cost_usd": 7.1e-05
+          "output": 59,
+          "cost_usd": 6.4e-05
         }
       ],
       "scores": {
-        "parent": 46.4,
-        "neurodivergent": 43.6,
-        "chronic_illness": 53.6,
-        "eldercare": 51.0
+        "parent": 47.0,
+        "neurodivergent": 38.8,
+        "chronic_illness": 35.1,
+        "eldercare": 48.4
       },
-      "evidence_count": 9,
+      "evidence_count": 10,
       "rejected": 0,
       "questions": 1
     }
@@ -441,19 +406,19 @@
     "price_source": "https://alternativeto.net/news/2026/9/openai-introduces-gpt-6-sol-and-luna-with-lower-api-prices/",
     "cold_mean": {
       "calls": 3,
-      "input_tokens": 1744.6,
+      "input_tokens": 1821.2,
       "cached_input_tokens": 0,
-      "output_tokens": 1431.2,
-      "total_tokens": 3175.8,
-      "cost_usd": 0.0008902
+      "output_tokens": 1389,
+      "total_tokens": 3210.2,
+      "cost_usd": 0.0008768
     },
     "warm_mean": {
-      "calls": 3,
-      "input_tokens": 1744.6,
+      "calls": 2,
+      "input_tokens": 772.2,
       "cached_input_tokens": 0,
-      "output_tokens": 1431.2,
-      "total_tokens": 3175.8,
-      "cost_usd": 0.0008902
+      "output_tokens": 211.8,
+      "total_tokens": 984,
+      "cost_usd": 0.0001832
     },
     "errors": []
   }

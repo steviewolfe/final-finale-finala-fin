@@ -1,9 +1,10 @@
 # Between the Lines
 
 A job posting checker for neurodivergent job seekers and working parents or caregivers.
-Paste a posting, pick one or more need profiles, and the app shows:
+Paste a posting, pick up to four need profiles from the eight available, and the app shows:
 
-- **Fit scores** per profile, computed by plain Python from quoted evidence.
+- **Fit scores** per profile, computed by plain Python from quoted evidence. Profiles: working parent or caregiver, neurodivergent, chronic illness or disability, eldercare, Deaf or hard of hearing, religious observance, students and part-time workers, and career returners.
+- **An inclusion and accommodation check**, a ninth category that shows whether a posting says how to request adjustments.
 - **Highlighted quotes** from the posting, so every claim can be checked.
 - **"Not mentioned: ask about this"** for anything the posting leaves out.
 - **Questions for the employer** that get the information without revealing your diagnosis, children, or health. A privacy guard checks each question against your private notes.
