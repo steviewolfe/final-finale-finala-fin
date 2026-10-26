@@ -56,6 +56,36 @@ Set one of these in `.env`:
 
 The app looks for `.env` in the repo folder first, then in the folder one level above. Existing environment variables take priority over both. Keys are never printed or logged.
 
+## Screenshots
+
+**Start screen.** The introduction explains the problem before anyone pastes a posting.
+
+![Start screen](evals/screenshots/01_compose.png)
+
+**Review.** Quoted claims are underlined in the posting. The rail shows the score, suggestions, and questions to ask.
+
+![Review screen](evals/screenshots/02_review.png)
+
+**Explanations.** Hovering an underline shows what it says, why it matters, and how it changes the score for the active profile.
+
+![Tooltip on an underlined claim](evals/screenshots/03_tooltip.png)
+
+**Predict first.** Before the evidence appears, the reader guesses how many areas the posting leaves vague.
+
+![Predict card](evals/screenshots/predict_card.png)
+
+**Explore.** Every quoted claim as a dot, grouped by category, with signal filters.
+
+![Explore grid](evals/screenshots/explore_grid.png)
+
+**Hidden instructions are ignored.** A line in the posting that tries to instruct the AI is flagged and has no effect on the score.
+
+![Flagged instruction](evals/screenshots/07_flagged.png)
+
+**Run details.** Each run's pipeline trace, token use by agent, and rejected quotes.
+
+![Run details](evals/screenshots/06_details.png)
+
 ## Laws of UX in the app
 
 These laws (from lawsofux.com) shape the screens you see:

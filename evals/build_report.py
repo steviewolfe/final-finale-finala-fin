@@ -253,6 +253,9 @@ def report_html() -> str:
         ["Cost inflation: very large paste",
          f"Refused with no model call: \"{s5['message']}\"",
          "Tested"],
+        ["Wrong action: something sent on the user's behalf",
+         "No endpoint can post to an employer or third party; the only writes are the analysis and a local budget reset. Tested by a route check.",
+         "Tested, backend/tests"],
         ["Data leak: question reveals a private diagnosis",
          f"Action: {s6['action']} (layer: {s6['layer']}). Safe question: \"{s6['safe_question']}\" Leaks left: {len(s6['leaks_in_final_question'])}.",
          "Tested, every action logged"],
@@ -443,6 +446,7 @@ def slides_html() -> str:
         ("Runaway loop", "Per-run call cap", "stopped at 6 calls"),
         ("Oversized paste", "Length limit", "refused, 0 model calls"),
         ("Private data leak", "Privacy guard", f"{s6['action']} and logged; 0 leaks left"),
+        ("Wrong action", "Route check", "no endpoint sends outward (tested)"),
     ]
     safety_table = ("<table><thead><tr><th>Failure</th><th>Defence</th><th>Result (tested)</th></tr></thead><tbody>"
                     + "".join(f"<tr><td>{a}</td><td>{b}</td><td>{c}</td></tr>" for a, b, c in safety_rows)
