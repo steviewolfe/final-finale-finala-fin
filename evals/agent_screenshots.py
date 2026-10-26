@@ -34,7 +34,7 @@ with sync_playwright() as p:
     traced = info.value.json()
     pg.wait_for_selector(".summary", timeout=120000)
     assert not traced["cache_hit"], "traced run must be a cold run"
-    (ROOT / "eval" / "traced_run.json").write_text(json.dumps({
+    (ROOT / "evals" / "traced_run.json").write_text(json.dumps({
         "sample": "04_onsite_shift_coordinator.txt",
         "private_note_used": True,
         "trace": traced["trace"],

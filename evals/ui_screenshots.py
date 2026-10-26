@@ -34,6 +34,8 @@ with sync_playwright() as p:
     page.click("button.primary:has-text('Check this posting')")
     page.wait_for_selector(".paper mark.seg")
     page.wait_for_timeout(300)
+    page.evaluate("window.scrollTo(0, 0)")
+    page.wait_for_timeout(200)
     page.screenshot(path=str(OUT / "02_review.png"), full_page=False)
     check("review screen shows underlines", page.locator(".paper mark.seg").count() > 0)
     check("rail shows suggestion cards", page.locator(".rail .card").count() > 0)
