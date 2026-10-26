@@ -1,0 +1,74 @@
+"""Need profiles: category weights, tag overrides, and drafter topic hints.
+
+Weights are ordered by category in CATEGORIES and must sum to 1.0 (tests check this).
+Tag overrides replace the base signal value for an item that carries the tag.
+If several overrides match, the lowest value wins.
+
+Topic hints are condition-free. They describe what to ask about, never why.
+"""
+
+from __future__ import annotations
+
+from .schemas import CATEGORIES
+
+PROFILES: dict[str, dict] = {
+    "parent": {
+        "label": "Working parent or caregiver",
+        "weights": dict(zip(CATEGORIES, [.22, .18, .04, .12, .06, .06, .26, .06])),
+        "tag_overrides": {
+            "after_hours_expected": 0,
+            "on_call": 10,
+            "travel_required": 15,
+            "flexible_hours": 100,
+        },
+    },
+    "neurodivergent": {
+        "label": "Neurodivergent",
+        "weights": dict(zip(CATEGORIES, [.10, .10, .20, .16, .14, .10, .04, .16])),
+        "tag_overrides": {
+            "open_office": 10,
+            "phone_heavy": 15,
+            "vague_pace_language": 20,
+            "unstructured_interview": 15,
+            "async_friendly": 100,
+            "clear_expectations": 100,
+        },
+    },
+    "chronic_illness": {
+        "label": "Chronic illness or disability",
+        "weights": dict(zip(CATEGORIES, [.24, .20, .04, .14, .08, .06, .20, .04])),
+        "tag_overrides": {
+            "onsite_required": 10,
+            "travel_required": 10,
+            "on_call": 10,
+            "remote_ok": 100,
+            "generous_leave": 100,
+        },
+    },
+    "eldercare": {
+        "label": "Eldercare or sandwich-generation caregiver",
+        "weights": dict(zip(CATEGORIES, [.24, .16, .04, .10, .04, .06, .30, .06])),
+        "tag_overrides": {
+            "on_call": 5,
+            "travel_required": 15,
+            "after_hours_expected": 15,
+            "onsite_required": 25,
+            "unclear_leave": 20,
+        },
+    },
+}
+
+# Generic, condition-free prompts for the drafter. Used for every profile.
+TOPIC_HINTS: dict[str, str] = {
+    "schedule_flexibility": "how working hours are set and how schedule changes are communicated",
+    "remote_policy": "where and how often people work, and how location arrangements are decided",
+    "communication_style": "how the team communicates day to day and how much is live versus written",
+    "pace_and_pressure": "typical workload, how priorities change, and how deadlines are handled",
+    "work_environment": "the physical and social setting, travel, and team events",
+    "interview_process": "the stages of the interview and what each stage involves",
+    "caregiving_and_leave": "how time off, short-notice absences, and leave requests are handled",
+    "role_clarity": "what a typical week looks like and how success is measured",
+}
+
+FLAG_WEIGHT = 0.15
+FLAG_SCORE = 35

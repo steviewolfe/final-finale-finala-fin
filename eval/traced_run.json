@@ -1,0 +1,47 @@
+{
+  "sample": "04_onsite_shift_coordinator.txt",
+  "private_note_used": true,
+  "trace": [
+    "Evidence extracted by the model.",
+    "Quote check: rejected 0 of 16.",
+    "Scored 4 profile(s) with deterministic weights.",
+    "Drafted 2 question(s) for the primary profile.",
+    "Privacy guard: 0 rewritten, 0 blocked."
+  ],
+  "cache_hit": false,
+  "evidence_count": 16,
+  "rejected": 0,
+  "questions_kept": 2,
+  "scores": {
+    "parent": 27.5,
+    "neurodivergent": 29.6,
+    "chronic_illness": 20.7,
+    "eldercare": 25.6
+  },
+  "by_agent": [
+    {
+      "agent": "extractor",
+      "input_tokens": 960,
+      "cached_input_tokens": 0,
+      "output_tokens": 1323,
+      "cost_usd": 0.000758
+    },
+    {
+      "agent": "drafter",
+      "input_tokens": 455,
+      "cached_input_tokens": 0,
+      "output_tokens": 265,
+      "cost_usd": 0.000178
+    },
+    {
+      "agent": "guard",
+      "input_tokens": 360,
+      "cached_input_tokens": 0,
+      "output_tokens": 119,
+      "cost_usd": 9.6e-05
+    }
+  ],
+  "calls": 3,
+  "total_tokens": 3482,
+  "cost_usd": 0.001031
+}
