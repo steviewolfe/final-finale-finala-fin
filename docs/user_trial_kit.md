@@ -47,7 +47,7 @@ Open questions (write their words exactly):
 One row per person per posting. Columns are in evals/trial_log.csv.
 
 ## 6. Putting it in the report
-- Replace the Impact placeholders with: the number of people, median time without and with
+- Add the results to the Impact section of the report, using: the number of people, median time without and with
   the app, how many changed their answer, and one quote each person agreed to.
 - Report only what happened. Include small samples as small samples.
 - Keep the consent record (not names) in your own files, not in the repo.

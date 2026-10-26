@@ -144,7 +144,7 @@ logs/                  usage.csv, privacy_log.csv, and the extraction cache (cre
 
 ## Notes and limits
 
-- Cost figures use **placeholder** prices in `backend/between_the_lines/pricing.py`. Replace them with the real rates before relying on any cost number.
+- Cost figures use gpt-6-luna list prices from `backend/between_the_lines/pricing.py`: $0.10 per million input tokens, $0.50 per million output tokens, and $0.01 per million cached input tokens. The input and output rates come from launch coverage of the model (AlternativeTo, September 2026). The cached rate comes from secondary price listings (eesel.ai). OpenAI's own price page blocked automated checks, so confirm the rates there before relying on a cost to the cent.
 - Scores measure how well the posting's *stated* terms match a profile. They cannot tell you what a team is actually like. The app shows coverage so you can see how much of a profile the posting actually addressed.
 - Privacy notes are sent to the model for the privacy check. Do not enter anything you would not want sent to the model provider.
 - Fictional sample postings only. Not legal or medical advice.
