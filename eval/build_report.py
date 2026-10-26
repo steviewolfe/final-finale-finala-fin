@@ -268,6 +268,7 @@ def report_html() -> str:
   <h1>Between the Lines</h1>
   <p><strong>Name:</strong> Stevie Wolfe<br>
 
+  <strong>Repository:</strong> <a href="https://github.com/steviewolfe/final-finale-finala-fin">github.com/steviewolfe/final-finale-finala-fin</a><br>
   <strong>Live app:</strong> not hosted. Run locally from the README in about five minutes.</p>
   <p class="callout">Between the Lines reads a job posting for people who have to weigh work against their health, their brains, or their families. It shows every claim next to the exact words it came from, scores it for each need profile, and drafts questions to ask without revealing anything private.</p>
 </section>
@@ -513,6 +514,7 @@ def slides_html() -> str:
 <section>
   <p class="kicker">Thank you</p>
   <h2>Between the Lines</h2>
+  <p>Code: <a href="https://github.com/steviewolfe/final-finale-finala-fin">github.com/steviewolfe/final-finale-finala-fin</a></p>
 </section>
 
 </div></div>
