@@ -7,7 +7,7 @@ Traced run: sample 04 with the private note, all four profiles, primary 'parent'
   drafter        -> 'Ask about' cards
   privacy guard  -> Run details trace: 'Privacy guard: N rewritten, M blocked'
 Input checks: sample 05 (contains a hidden instruction), Run details trace line.
-    ./.venv/bin/python eval/agent_screenshots.py
+    ./.venv/bin/python evals/agent_screenshots.py
 """
 import json
 from pathlib import Path

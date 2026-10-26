@@ -1,22 +1,22 @@
 """Builds report.html and slides.html from measured data.
 
-Every number comes from eval/measurements.json or eval/safety_log.json, and every
+Every number comes from evals/measurements.json or evals/safety_log.json, and every
 screenshot and font is embedded, so each file opens by double-click.
 Items only the author can supply are marked [TO COMPLETE: ...] and must be filled in
 before submission. Nothing is invented.
 
-    ./.venv/bin/python eval/build_report.py
+    ./.venv/bin/python evals/build_report.py
 """
 import base64
 import html
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-SHOTS = ROOT / "eval" / "screenshots"
+ROOT = Path(__file__).resolve().parents[1]
+SHOTS = ROOT / "evals" / "screenshots"
 FONTS = ROOT / "frontend" / "node_modules" / "@fontsource"
-M = json.loads((ROOT / "eval" / "measurements.json").read_text(encoding="utf-8"))
-S = json.loads((ROOT / "eval" / "safety_log.json").read_text(encoding="utf-8"))
+M = json.loads((ROOT / "evals" / "measurements.json").read_text(encoding="utf-8"))
+S = json.loads((ROOT / "evals" / "safety_log.json").read_text(encoding="utf-8"))
 
 CHECKS_PER_MONTH = 8  # assumption: about two postings a week for an active search
 USERS = (100, 10_000)
@@ -44,8 +44,8 @@ total_cost = sum(t["cost"] for t in agents.values()) or 1
 per_user_month = CHECKS_PER_MONTH * cold["cost_usd"]
 saving_warm = 1 - warm["cost_usd"] / cold["cost_usd"]
 
-# The traced run comes from eval/agent_screenshots.py: one cold run, screenshots taken from the same run.
-TRACED = json.loads((ROOT / "eval" / "traced_run.json").read_text(encoding="utf-8"))
+# The traced run comes from evals/agent_screenshots.py: one cold run, screenshots taken from the same run.
+TRACED = json.loads((ROOT / "evals" / "traced_run.json").read_text(encoding="utf-8"))
 sample04 = {
     "evidence_count": TRACED["evidence_count"],
     "rejected": TRACED["rejected"],
@@ -317,7 +317,7 @@ def report_html() -> str:
       ["Privacy guard", "Check each question against private notes; rewrite or drop; log", "Questions, private notes, keyword list", "Keyword list plus gpt-6-luna"],
     ])}
   <h3>One real run, traced step by step</h3>
-  <p>Posting 04 (an onsite shift role), all four profiles, with the private note &ldquo;I have ADHD and two kids&rdquo;. Figures are from the cold run measured in <code>eval/measurements.json</code>.</p>
+  <p>Posting 04 (an onsite shift role), all four profiles, with the private note &ldquo;I have ADHD and two kids&rdquo;. Figures are from the cold run measured in <code>evals/measurements.json</code>.</p>
   <ol>{sample04_steps}</ol>
   <h3>Per-agent screenshots</h3>
   <p>Each screenshot is from the same traced run unless the caption says otherwise. Each one shows that agent&rsquo;s own output on screen.</p>
@@ -348,7 +348,7 @@ def report_html() -> str:
 
 <section class="page pagebreak">
   <h2>5. Safety</h2>
-  <p>The app takes untrusted text (job postings) and turns it into advice, so the risks that matter are an attacker hiding instructions in a posting, the model inventing facts, a privacy leak through a drafted question, and runaway cost. Each defence below was run against the failure it is for. The raw results are in <code>eval/safety_log.json</code>.</p>
+  <p>The app takes untrusted text (job postings) and turns it into advice, so the risks that matter are an attacker hiding instructions in a posting, the model inventing facts, a privacy leak through a drafted question, and runaway cost. Each defence below was run against the failure it is for. The raw results are in <code>evals/safety_log.json</code>.</p>
   {table(["Risk", "What happened with the defence", "Evidence"], safety_rows)}
   {shot("07_flagged.png", "A posting with a hidden instruction. The sentence is flagged and marked as ignored, and the warning appears in Run details.")}
   <h3>What the defence does not do</h3>
@@ -523,7 +523,7 @@ def slides_html() -> str:
 </body></html>"""
 
 
-(ROOT / "report.html").write_text(report_html(), encoding="utf-8")
-(ROOT / "slides.html").write_text(slides_html(), encoding="utf-8")
-print("wrote report.html and slides.html")
+(ROOT / "docs" / "report.html").write_text(report_html(), encoding="utf-8")
+(ROOT / "docs" / "slides.html").write_text(slides_html(), encoding="utf-8")
+print("wrote docs/report.html and docs/slides.html")
 print("per user per month:", round(per_user_month, 6), "| scores match warm/cold:", scores_match)

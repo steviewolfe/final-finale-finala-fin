@@ -43,8 +43,8 @@ Open questions (write their words exactly):
 - What confused you?
 - What did you want that was missing?
 
-## 5. What to record (eval/trial_log.csv)
-One row per person per posting. Columns are in eval/trial_log.csv.
+## 5. What to record (evals/trial_log.csv)
+One row per person per posting. Columns are in evals/trial_log.csv.
 
 ## 6. Putting it in the report
 - Replace the Impact placeholders with: the number of people, median time without and with

@@ -1,7 +1,7 @@
 """Drive the running app in headless Chromium and save screenshots of the review flow.
 
 Start the server first (see README), then run:
-    ./.venv/bin/python eval/ui_screenshots.py
+    ./.venv/bin/python evals/ui_screenshots.py
 """
 from pathlib import Path
 from playwright.sync_api import sync_playwright

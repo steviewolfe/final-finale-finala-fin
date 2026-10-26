@@ -1,7 +1,7 @@
 """Phase 4 check: guard deliberately leaky questions against private notes."""
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from between_the_lines.llm import SessionBudget
 from between_the_lines.privacy_guard import guard_questions

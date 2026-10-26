@@ -1,13 +1,13 @@
 """One real LLM call to confirm the key, model, and routing work.
 
-Run from the repo root:  ./.venv/bin/python eval/smoke_test.py
+Run from the project root:  ./.venv/bin/python evals/smoke_test.py
 Prints the model name and token counts only. Never prints a key.
 """
 
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from between_the_lines.config import MODEL, get_client  # noqa: E402
 

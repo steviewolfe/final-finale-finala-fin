@@ -1,5 +1,5 @@
 """Checks for the five novelty features: predict, scroll reveal, morphing, explore, and paths.
-Server must be running on :8000.   ./.venv/bin/python eval/ui_novelty_check.py
+Server must be running on :8000.   ./.venv/bin/python evals/ui_novelty_check.py
 """
 import sys
 from playwright.sync_api import sync_playwright
@@ -66,7 +66,7 @@ with sync_playwright() as p:
     check("guided mode keeps what you have already read", pg.locator("mark.seg.is-unlit").count() == 0)
 
     check("no page errors", not errors, "; ".join(errors)[:120] if errors else "")
-    pg.screenshot(path="eval/screenshots/novelty_review.png")
+    pg.screenshot(path="evals/screenshots/novelty_review.png")
     b.close()
 
 passed = sum(ok for _, ok in results)

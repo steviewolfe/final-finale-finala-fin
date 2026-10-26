@@ -2,7 +2,7 @@
 
 These measure where things sit and how big they are, not only whether they exist.
 Each check maps to a finding from the audit. Exits non-zero if any check fails.
-    ./.venv/bin/python eval/ui_layout_check.py
+    ./.venv/bin/python evals/ui_layout_check.py
 """
 import sys
 from playwright.sync_api import sync_playwright

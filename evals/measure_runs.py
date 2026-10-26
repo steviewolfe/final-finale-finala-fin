@@ -1,19 +1,19 @@
-"""Measure real token use and cost for typical runs. Writes eval/measurements.json.
+"""Measure real token use and cost for typical runs. Writes evals/measurements.json.
 
 Each sample is checked twice with all four profiles and a private note:
   cold: extraction cache off (every call is made)
   warm: extraction cache on (the second check of the same posting)
 Token counts come from the model's own usage fields, via RunMeter.
-    ./.venv/bin/python eval/measure_runs.py
+    ./.venv/bin/python evals/measure_runs.py
 """
 import json
 import sys
 from pathlib import Path
 from statistics import mean
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
-from between_the_lines.config import REPO_DIR
+from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.llm import SessionBudget
 from between_the_lines.pipeline import run_pipeline
 from between_the_lines.pricing import PRICE_SOURCE, PRICE_PER_MTOK
@@ -22,7 +22,7 @@ from between_the_lines.profiles import PROFILES
 NOTES = "I have ADHD and two kids"
 PIDS = list(PROFILES)
 budget = SessionBudget(limit=10**9)
-samples = sorted((REPO_DIR / "sample_postings").glob("*.txt"))
+samples = sorted((REPO_DIR / "data" / "sample_postings").glob("*.txt"))
 
 runs = []
 for path in samples:

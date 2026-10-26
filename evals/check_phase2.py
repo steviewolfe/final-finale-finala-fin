@@ -1,9 +1,9 @@
 """Phase 2 check: extract + quote-check sample postings 01 and 05."""
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
-from between_the_lines.config import REPO_DIR
+from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.extractor import extract_evidence
 from between_the_lines.llm import SessionBudget
 from between_the_lines.quote_checker import check_quotes
@@ -12,7 +12,7 @@ from between_the_lines.usage import RunMeter
 
 budget = SessionBudget(limit=60_000)
 for name in ["01_startup_ops_manager.txt", "05_marketing_coordinator.txt"]:
-    posting = (REPO_DIR / "sample_postings" / name).read_text(encoding="utf-8")
+    posting = (REPO_DIR / "data" / "sample_postings" / name).read_text(encoding="utf-8")
     run = RunMeter(f"p2-{name[:2]}")
     result, hit = extract_evidence(posting, run=run, budget=budget, use_cache=False)
     qc = check_quotes(result.evidence, posting)

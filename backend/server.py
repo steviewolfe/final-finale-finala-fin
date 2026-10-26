@@ -16,7 +16,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from between_the_lines.config import MAX_NOTES_CHARS, MAX_POSTING_CHARS, SESSION_TOKEN_BUDGET
+from between_the_lines.config import MAX_NOTES_CHARS, MAX_POSTING_CHARS, PROJECT_DIR, SAMPLE_DIR, SESSION_TOKEN_BUDGET
 from between_the_lines.explain import FLAGGED_WHY, profile_why, tag_why
 from between_the_lines.highlight import posting_segments
 from between_the_lines.llm import SessionBudget
@@ -28,9 +28,7 @@ from between_the_lines.schemas import CATEGORIES
 from between_the_lines.scorer import item_value
 from between_the_lines.security import PostingTooLong
 
-REPO_DIR = Path(__file__).resolve().parent
-SAMPLE_DIR = REPO_DIR / "sample_postings"
-DIST_DIR = REPO_DIR / "frontend" / "dist"
+DIST_DIR = PROJECT_DIR / "frontend" / "dist"
 
 # Production: no interactive API docs are published.
 app = FastAPI(title="Between the Lines", version="1.0.0", docs_url=None, redoc_url=None, openapi_url=None)

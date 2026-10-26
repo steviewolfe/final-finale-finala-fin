@@ -18,7 +18,7 @@ cd between-the-lines
 
 # Backend
 python3 -m venv .venv
-./.venv/bin/pip install -r requirements.txt
+./.venv/bin/pip install -r backend/requirements.txt
 
 # Frontend (build once, or after any change in frontend/)
 cd frontend
@@ -29,7 +29,7 @@ cd ..
 cp .env.example .env          # then add your key (see below)
 
 # Production run: no auto-reload, bound to this machine only
-./.venv/bin/uvicorn server:app --host 127.0.0.1 --port 8000
+./.venv/bin/uvicorn server:app --app-dir backend --host 127.0.0.1 --port 8000
 ```
 
 Open http://localhost:8000. The server serves the built app and the API from one process. Health check: http://localhost:8000/healthz.
@@ -78,7 +78,7 @@ The review screen follows a Grammarly-style layout: a white document card on a p
 
 ## Test data
 
-The app has no large database. The test data is `sample_postings/`: five fictional postings, one of which contains a hidden instruction. Choose one from **Load a sample** on the compose screen. Nothing needs switching.
+The app has no large database. The test data is `data/sample_postings/`: five fictional postings, one of which contains a hidden instruction. Choose one from **Load a sample** on the compose screen. Nothing needs switching.
 
 ## Try it
 
@@ -105,17 +105,17 @@ A typical run makes 3 model calls. Every call is logged to `logs/usage.csv` with
 
 | Limit | Default | Where |
 |---|---|---|
-| Posting length | 12,000 characters | `between_the_lines/config.py` |
-| Private notes length | 500 characters | `between_the_lines/config.py` |
-| LLM calls per run | 6 | `between_the_lines/config.py` |
-| Session token budget | 60,000 tokens | `between_the_lines/config.py` |
+| Posting length | 12,000 characters | `backend/between_the_lines/config.py` |
+| Private notes length | 500 characters | `backend/between_the_lines/config.py` |
+| LLM calls per run | 6 | `backend/between_the_lines/config.py` |
+| Session token budget | 60,000 tokens | `backend/between_the_lines/config.py` |
 
 A run that hits a limit stops with a plain message and keeps any results already produced.
 
 ## Tests
 
 ```bash
-./.venv/bin/python -m pytest -q tests
+./.venv/bin/python -m pytest
 ```
 
 The tests do not call the model. They cover the scorer, quote checking, injection flags, and the privacy keyword layer.
@@ -123,20 +123,28 @@ The tests do not call the model. They cover the scorer, quote checking, injectio
 ## Repo layout
 
 ```
-server.py              FastAPI API; serves the built React app
+backend/               Python: API server and the agent pipeline
+  server.py            FastAPI app: serves the API and the built React app
+  between_the_lines/   the pipeline: extractor, quote_checker, scorer, drafter, privacy_guard
+    prompts/           system prompts for the three LLM agents
+    profiles.py        need profiles: weights and tag overrides
+  tests/               unit tests (no model calls)
+  requirements.txt     Python dependencies
 frontend/              React + Vite UI (yarn)
-between_the_lines/     the pipeline: extractor, quote_checker, scorer, drafter, privacy_guard
-  prompts/             system prompts for the three LLM agents
-  profiles.py          need profiles: weights and tag overrides
-sample_postings/       five fictional postings (05 contains a prompt injection)
-tests/                 unit tests (no model calls)
-eval/                  manual checks that call the model; ui_screenshots.py drives the app in headless Chromium
+data/
+  sample_postings/     five fictional postings (05 contains a prompt injection)
+evals/                 scripts that call the model or drive the browser, and their measured results
+  screenshots/         screenshots used in the report
+docs/
+  report.html          final report (self-contained)
+  slides.html          slides (reveal.js from a CDN)
+  user_trial_kit.md    protocol for a real-user trial
 logs/                  usage.csv, privacy_log.csv, and the extraction cache (created at runtime, not committed)
 ```
 
 ## Notes and limits
 
-- Cost figures use **placeholder** prices in `between_the_lines/pricing.py`. Replace them with the real rates before relying on any cost number.
+- Cost figures use **placeholder** prices in `backend/between_the_lines/pricing.py`. Replace them with the real rates before relying on any cost number.
 - Scores measure how well the posting's *stated* terms match a profile. They cannot tell you what a team is actually like. The app shows coverage so you can see how much of a profile the posting actually addressed.
 - Privacy notes are sent to the model for the privacy check. Do not enter anything you would not want sent to the model provider.
 - Fictional sample postings only. Not legal or medical advice.

@@ -12,10 +12,12 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
-REPO_DIR = Path(__file__).resolve().parent.parent
-PARENT_DIR = REPO_DIR.parent
+# backend/between_the_lines/config.py -> project root is three levels up.
+PROJECT_DIR = Path(__file__).resolve().parents[2]
+PARENT_DIR = PROJECT_DIR.parent
+SAMPLE_DIR = PROJECT_DIR / "data" / "sample_postings"
 
-load_dotenv(REPO_DIR / ".env", override=False)
+load_dotenv(PROJECT_DIR / ".env", override=False)
 load_dotenv(PARENT_DIR / ".env", override=False)
 
 MODEL = "gpt-6-luna"
@@ -31,9 +33,9 @@ SESSION_TOKEN_BUDGET = 60_000
 # tokens on internal reasoning, so a 1,500 cap returned empty content in testing.
 MAX_OUTPUT_TOKENS = {"extractor": 6000, "drafter": 4000, "guard": 4000}
 
-USAGE_LOG = REPO_DIR / "logs" / "usage.csv"
-PRIVACY_LOG = REPO_DIR / "logs" / "privacy_log.csv"
-CACHE_DIR = REPO_DIR / "logs" / "cache"
+USAGE_LOG = PROJECT_DIR / "logs" / "usage.csv"
+PRIVACY_LOG = PROJECT_DIR / "logs" / "privacy_log.csv"
+CACHE_DIR = PROJECT_DIR / "logs" / "cache"
 
 
 def get_client() -> OpenAI:

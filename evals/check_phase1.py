@@ -1,7 +1,7 @@
 """Phase 1 check: one structured call gets logged; a tiny budget stops the run."""
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
 from between_the_lines.llm import BudgetExceeded, SessionBudget, call_llm
 from between_the_lines.schemas import GUARD_SCHEMA

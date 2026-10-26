@@ -1,14 +1,14 @@
 """Safety evidence: each defence is run against the attack or malfunction it exists for.
-Writes eval/safety_log.json. Model calls are made only where the test needs them.
-    ./.venv/bin/python eval/safety_demo.py
+Writes evals/safety_log.json. Model calls are made only where the test needs them.
+    ./.venv/bin/python evals/safety_demo.py
 """
 import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
-from between_the_lines.config import REPO_DIR
+from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.llm import BudgetExceeded, SessionBudget, call_llm
 from between_the_lines.pipeline import run_pipeline
 from between_the_lines.privacy_guard import guard_questions
@@ -20,7 +20,7 @@ from between_the_lines.usage import RunMeter
 
 PIDS = list(PROFILES)
 log = {}
-samples = REPO_DIR / "sample_postings"
+samples = REPO_DIR / "data" / "sample_postings"
 
 # 1. Invented facts: the model returns a quote that is not in the posting.
 posting = (samples / "01_startup_ops_manager.txt").read_text(encoding="utf-8")

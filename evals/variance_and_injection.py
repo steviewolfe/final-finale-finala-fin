@@ -9,16 +9,16 @@
 import sys
 from pathlib import Path
 from statistics import mean, pstdev
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 
-from between_the_lines.config import REPO_DIR
+from between_the_lines.config import PROJECT_DIR as REPO_DIR
 from between_the_lines.llm import SessionBudget
 from between_the_lines.pipeline import run_pipeline
 from between_the_lines.profiles import PROFILES
 
 PIDS = list(PROFILES)
 budget = SessionBudget(limit=10**9)  # evidence script; the session budget is not the point here
-sample = REPO_DIR / "sample_postings"
+sample = REPO_DIR / "data" / "sample_postings"
 p01 = (sample / "01_startup_ops_manager.txt").read_text()
 p05 = (sample / "05_marketing_coordinator.txt").read_text()
 p05_clean = "\n".join(l for l in p05.splitlines() if "AI system note" not in l).strip()
